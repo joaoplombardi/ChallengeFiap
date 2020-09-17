@@ -1,15 +1,13 @@
 package br.com.fiap.b2w.models;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDateTime;
-import java.time.chrono.ChronoPeriod;
 import java.time.temporal.ChronoUnit;
 
 public class
 Task {
-    private br.com.fiap.b2w.models.Gestor gestor;
-    private br.com.fiap.b2w.models.Associado lideradoaFazer;
-    private String status;
+    private Gestor gestor;
+    private Associado lideradoaFazer;
+    private Status status;
     private LocalDate dtCriacao;
     private LocalDate dtInicio;
     private LocalDate dtTermino;
@@ -18,33 +16,33 @@ Task {
     public Task() {
     }
 
-    public Task(br.com.fiap.b2w.models.Gestor gestor, br.com.fiap.b2w.models.Associado lideradoaFazer, String objetivo) {
+    public Task(Gestor gestor, Associado lideradoaFazer, String objetivo) {
         this.gestor = gestor;
         this.lideradoaFazer = lideradoaFazer;
         this.dtCriacao = LocalDate.now();
         this.dtInicio = null;
         this.dtTermino = null;
         this.objetivo = objetivo;
-        this.status = "Não Iniciado";
+        this.status = Status.PARADA;
     }
 
-    public br.com.fiap.b2w.models.Gestor getGestor() {
+    public Gestor getGestor() {
         return gestor;
     }
 
-    public br.com.fiap.b2w.models.Associado getLideradoaFazer() {
+    public Associado getLideradoaFazer() {
         return lideradoaFazer;
     }
 
-    public void setLideradoaFazer(br.com.fiap.b2w.models.Associado lideradoaFazer) {
+    public void setLideradoaFazer(Associado lideradoaFazer) {
         this.lideradoaFazer = lideradoaFazer;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -69,16 +67,16 @@ Task {
     }
 
     public void iniciar(){
-        this.status = "Em Curso";
+        this.status = Status.INICIALIZADA;
         this.dtInicio = LocalDate.now();
     }
 
     public void terminar(){
-        this.status = "Concluída";
+        this.status = Status.CONCLUIDA;
         this.dtTermino = LocalDate.now();
     }
     public long calculaTempoTermino(){
-        long tempoTermino = ChronoUnit.HOURS.between(dtInicio, dtTermino);
+        long tempoTermino = ChronoUnit.DAYS.between(dtInicio, dtTermino);
         return tempoTermino;
     }
 

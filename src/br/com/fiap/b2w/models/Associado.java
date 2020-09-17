@@ -9,7 +9,7 @@ public class Associado {
     private String cargo;
     private long cpf;
     private PlanodeEstudo planodeEstudo;
-    private PlanodeAcao planodeAcao;
+    private PlanodeDesenvolvimento planodeDesenvolvimento;
 
     public Associado(int nrCadastro, String nomeCompleto, String email, String senha, String cargo, long cpf) {
         this.nrCadastro = nrCadastro;
@@ -56,11 +56,11 @@ public class Associado {
         this.planodeEstudo = planodeEstudo;
     }
 
-    public PlanodeAcao getPlanodeAcao() {
-        return planodeAcao;
+    public PlanodeDesenvolvimento getPlanodeDesenvolvimento() {
+        return planodeDesenvolvimento;
     }
 
-    public void setPlanodeAcao(PlanodeAcao planodeAcao) {
-        this.planodeAcao = planodeAcao;
+    public void setPlanodeDesenvolvimento(PlanodeDesenvolvimento planodeDesenvolvimento) {
+        this.planodeDesenvolvimento = planodeDesenvolvimento;
     }
 }

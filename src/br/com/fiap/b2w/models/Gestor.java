@@ -1,15 +1,18 @@
 package br.com.fiap.b2w.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Gestor extends br.com.fiap.b2w.models.Associado {
 
     private String setorGerencia;
-    private br.com.fiap.b2w.models.Associado[] liderados;
+    private List<Associado> liderados;
 
     public Gestor(int nrCadastro, String nomeCompleto, String email,
-                  String senha, String cargo, long cpf, String setorGerencia, br.com.fiap.b2w.models.Associado[] liderados) {
+                  String senha, String cargo, long cpf, String setorGerencia, List<Associado> liderados) {
         super(nrCadastro, nomeCompleto, email, senha, cargo, cpf);
         this.setorGerencia = setorGerencia;
-        this.liderados = liderados;
+        this.liderados = new ArrayList<>();
     }
 
     public String getSetorGerencia() {
@@ -20,11 +23,11 @@ public class Gestor extends br.com.fiap.b2w.models.Associado {
         this.setorGerencia = setorGerencia;
     }
 
-    public br.com.fiap.b2w.models.Associado[] getLiderados() {
+    public List<Associado> getLiderados() {
         return liderados;
     }
 
-    public void setLiderados(br.com.fiap.b2w.models.Associado[] liderados) {
+    public void setLiderados(List<Associado> liderados) {
         this.liderados = liderados;
     }
 }
