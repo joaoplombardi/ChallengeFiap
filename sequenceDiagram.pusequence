@@ -1,6 +1,8 @@
 @startuml
 autonumber
 Gestor -> PlanoDeDesenvolvimento : Cria Plano de Desenvolvimento
+PlanoDeDesenvolvimento -> Task : Atribui tasks
+Task -> PlanoDeDesenvolvimento: Tasks atribuidas
 PlanoDeDesenvolvimento -> Gestor : Notifica Plano criado
 Gestor -> RH : Envia para aprovação
 RH -> Gestor : Notifica aprovação
