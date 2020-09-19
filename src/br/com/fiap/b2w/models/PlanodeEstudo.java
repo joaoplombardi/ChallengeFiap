@@ -12,6 +12,9 @@ public class PlanodeEstudo {
     private List<Recomendacao> recomendacoes;
     private int duracao;
 
+    public PlanodeEstudo() {
+    }
+
     public PlanodeEstudo(Associado associado,
                          Gestor gestor,
                          String areadeConhecimento,

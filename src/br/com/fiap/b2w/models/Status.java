@@ -2,6 +2,7 @@ package br.com.fiap.b2w.models;
 
 public enum Status {
     CONCLUIDA("Concluída"),
+    CRIADA("Criada"),
     INICIALIZADA("Em andamento"),
     PARADA("Parada");
 

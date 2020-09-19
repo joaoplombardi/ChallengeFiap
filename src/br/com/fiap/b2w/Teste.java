@@ -7,52 +7,100 @@ import java.util.List;
 
 public class Teste {
     public static void main(String[] args) {
-        //criando o funcionario, gestor e liderados do gestor
-        Associado func = new Associado(123, "naotemainda", "abc@123.com", "1234", "dev", 123456789);
-        List<Associado> arrayLiderados = new ArrayList<>();
-        arrayLiderados.add(func);
 
-        Gestor gestor = new Gestor(321, "tbmntem", "cba@321.com", "4321", "gestor", 987654321,
-                "devs", arrayLiderados);
+        Associado bruno = new Associado();
+        Associado jonas = new Associado();
+        Equipe equipe = new Equipe();
+        Gestor alice = new Gestor();
+        PlanodeDesenvolvimento planodeDesenvolvimento1 = new PlanodeDesenvolvimento();
+        PlanodeDesenvolvimento planodeDesenvolvimento2 = new PlanodeDesenvolvimento();
+        PlanodeEstudo planodeEstudo = new PlanodeEstudo();
+        RH rh = new RH();
+        Task task1 = new Task();
+        Task task2 = new Task();
 
-        //criando as tasks
-        Task task1 = new Task(gestor, func, "Terminar o teste");
-        Task task2 = new Task(gestor, func, "Subir o projeto");
-        List<Task> arrayTasks = new ArrayList<>();
-        arrayTasks.add(task1);
-        arrayTasks.add(task2);
+        task1.setCdTask(15561651);
+        task1.setObjetivo("ASDF");
+        task1.setStatus(Status.CRIADA);
 
-        //criando recomendacoes
-        Recomendacao recom1 = new Recomendacao("leitura", 15);
-        Recomendacao recom2 = new Recomendacao("video", 30);
-        Recomendacao[] arrayRecomendacoes = {recom1, recom2};
+        task2.setCdTask(8794621);
+        task2.setObjetivo("QWER");
+        task2.setStatus(Status.CRIADA);
 
-        //criando plano de estudo
-        PlanodeEstudo pe = new PlanodeEstudo(func, gestor, "Desenvolvimento", arrayRecomendacoes);
-        func.setPlanodeEstudo(pe);
+        List<Task> tasks1 = new ArrayList<>();
+        List<Task> tasks2 = new ArrayList<>();
+        tasks1.add(task1);
+        tasks2.add(task2);
 
-        //criando plano de ação
-        PlanodeDesenvolvimento pa = new PlanodeDesenvolvimento(func, gestor);
-        pa.setTasks(arrayTasks);
-        func.setPlanodeDesenvolvimento(pa);
+        planodeDesenvolvimento1.setCdPlanodeDesenvolvimento(123);
+        planodeDesenvolvimento1.setAtivo(true);
+        planodeDesenvolvimento1.setTasks(tasks1);
+        planodeDesenvolvimento1.setAssociado(bruno);
 
-        //testes das funções plano de ação
-        System.out.println("Status task1: " + func.getPlanodeDesenvolvimento().consultaTaskPorPosicao(0).getStatus());
-        System.out.println("Status task2: " + func.getPlanodeDesenvolvimento().consultaTaskPorPosicao(1).getStatus());
+        planodeDesenvolvimento2.setCdPlanodeDesenvolvimento(456);
+        planodeDesenvolvimento2.setAtivo(true);
+        planodeDesenvolvimento2.setTasks(tasks2);
+        planodeDesenvolvimento2.setAssociado(jonas);
 
-        //teste das funções das tasks
-        System.out.println("Iniciando Task1...");
-        task1.iniciar();
-        System.out.println("Data de criação: " + task1.getDtCriacao());
-        System.out.println("Data de início: " + task1.getDtInicio());
-        System.out.println("Status task1: " + func.getPlanodeDesenvolvimento().consultaTaskPorPosicao(0).getStatus());
-        task1.terminar();
-        System.out.println("Terminando Task1...");
-        System.out.println("Status task1: " + func.getPlanodeDesenvolvimento().consultaTaskPorPosicao(0).getStatus());
-        System.out.println(task1.getDtTermino());
-        System.out.println("Foi concluída em "+task1.calculaTempoTermino()+" dias.");
+        List<PlanodeDesenvolvimento> planosdeDesenvolvimento = new ArrayList<>();
+        planosdeDesenvolvimento.add(planodeDesenvolvimento1);
+        planosdeDesenvolvimento.add(planodeDesenvolvimento2);
+
+        bruno.setNomeCompleto("Bruno");
+        bruno.setCargo("Dev back");
+        bruno.setEquipe(equipe);
+
+        jonas.setNomeCompleto("Jonas");
+        jonas.setCargo("Dev front");
+        jonas.setEquipe(equipe);
+
+        List<Associado> associados = new ArrayList<>();
+        associados.add(bruno);
+        associados.add(jonas);
+
+        equipe.setCdEquipe(123);
+        equipe.setGerenteResponsavel(alice);
+        equipe.setMembros(associados);
+
+
+        alice.setNomeCompleto("Alice");
+        alice.setEquipe(equipe);
+        alice.setLiderados(associados);
+        alice.setPlanosCriados(planosdeDesenvolvimento);
+
+        System.out.println("-----------------------");
+        System.out.println("Gestor(a): " + alice.getNomeCompleto());
+        System.out.println("-----------------------");
+        System.out.println("Equipe do Gestor(a)");
+        alice.getEquipe().getMembros().forEach(membro -> {
+            System.out.println(membro.getNomeCompleto() + " - " + membro.getCargo());
+        });
+        System.out.println("-----------------------");
+        System.out.println("Planos Criados pelo Gestor(a)");
+        alice.getPlanosCriados().forEach(planodeDesenvolvimento ->
+                System.out.println(planodeDesenvolvimento.getCdPlanodeDesenvolvimento())
+        );
+        System.out.println("-----------------------");
+        System.out.println("Tasks dentro do Plano");
+        alice.getPlanosCriados().forEach(planodeDesenvolvimento ->
+                planodeDesenvolvimento.getTasks().forEach(task ->
+                        System.out.println(
+                                task.getCdTask() + " - " +
+                                task.getObjetivo() + " - " +
+                                task.getStatus()
+                        )
+                )
+        );
+        System.out.println("-----------------------");
+        System.out.println("Plano atribuido");
+        alice.getPlanosCriados().forEach(planodeDesenvolvimento ->
+                System.out.println(
+                        planodeDesenvolvimento.getCdPlanodeDesenvolvimento() + " - " +
+                        planodeDesenvolvimento.getAssociado().getNomeCompleto()
+                )
+        );
+        System.out.println("-----------------------");
 
 
     }
-
 }
