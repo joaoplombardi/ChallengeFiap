@@ -1,6 +1,5 @@
 package br.com.fiap.b2w.models;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,8 @@ public class PlanodeDesenvolvimento {
     private LocalDate dtTermino;
     private LocalDate dtInicio;
     private List<Task> tasks;
-   // private Double percentualConcluidos;
-   // private Status status;
+    // private Double percentualConcluidos;
+    // private Status status;
     private Boolean ativo;
 
     public PlanodeDesenvolvimento() {
@@ -56,8 +55,8 @@ public class PlanodeDesenvolvimento {
         this.tasks = new ArrayList<>();
         this.dtInicio = null;
         this.dtTermino = null;
-       // this.percentualConcluidos = .0;
-     //   this.status = Status.PARADA;
+        // this.percentualConcluidos = .0;
+        //   this.status = Status.PARADA;
         this.ativo = false;
     }
 
@@ -118,7 +117,7 @@ public class PlanodeDesenvolvimento {
         this.tasks = tasks;
     }
 
-    public Task consultaTaskPorPosicao(int posicao){
+    public Task consultaTaskPorPosicao(int posicao) {
         return tasks.get(posicao);
     }
 
@@ -159,7 +158,6 @@ public class PlanodeDesenvolvimento {
 //        dt.format(percentual);
 //        this.percentualConcluidos = percentual;
 //    }
-
 
 
 }

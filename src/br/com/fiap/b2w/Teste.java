@@ -23,9 +23,9 @@ public class Teste {
         arrayTasks.add(task2);
 
         //criando recomendacoes
-        Recomendacoes recom1 = new Recomendacoes("leitura", 15);
-        Recomendacoes recom2 = new Recomendacoes("video", 30);
-        Recomendacoes[] arrayRecomendacoes = {recom1, recom2};
+        Recomendacao recom1 = new Recomendacao("leitura", 15);
+        Recomendacao recom2 = new Recomendacao("video", 30);
+        Recomendacao[] arrayRecomendacoes = {recom1, recom2};
 
         //criando plano de estudo
         PlanodeEstudo pe = new PlanodeEstudo(func, gestor, "Desenvolvimento", arrayRecomendacoes);

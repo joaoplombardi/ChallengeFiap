@@ -1,11 +1,11 @@
 package br.com.fiap.b2w.models;
 
-public class Recomendacoes {
+public class Recomendacao {
     //tipo = leitura, documentação etc.
     private String tipo;
     private double duracao;
 
-    public Recomendacoes(String tipo, double duracao) {
+    public Recomendacao(String tipo, double duracao) {
         this.tipo = tipo;
         this.duracao = duracao;
     }
@@ -26,7 +26,7 @@ public class Recomendacoes {
         this.duracao = duracao;
     }
 
-    public Recomendacoes() {
+    public Recomendacao() {
         super();
     }
 }

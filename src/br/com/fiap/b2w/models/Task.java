@@ -1,14 +1,10 @@
 package br.com.fiap.b2w.models;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-
-public class
-Task {
+public class Task {
     private Integer cdTask;
     private PlanodeDesenvolvimento planoPertencente;
     private Status status;
-//    private LocalDate dtCriacao;
+    //    private LocalDate dtCriacao;
 //    private LocalDate dtInicio;
 //    private LocalDate dtTermino;
     private String objetivo;

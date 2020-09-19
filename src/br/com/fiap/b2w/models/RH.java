@@ -2,7 +2,7 @@ package br.com.fiap.b2w.models;
 
 import java.util.List;
 
-public class RH extends Associado{
+public class RH extends Associado {
 
     private List<PlanodeDesenvolvimento> planosParaAprovacao;
 
@@ -18,7 +18,7 @@ public class RH extends Associado{
               long cpf,
               Integer cdSetorParaAprovar,
               List<PlanodeDesenvolvimento> planosParaAprovacao) {
-        super(nrCadastro, nomeCompleto, email, senha, equipe,cargo, cpf);
+        super(nrCadastro, nomeCompleto, email, senha, equipe, cargo, cpf);
 
         this.planosParaAprovacao = planosParaAprovacao;
     }

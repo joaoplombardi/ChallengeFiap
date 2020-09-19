@@ -1,6 +1,5 @@
 package br.com.fiap.b2w.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Gestor extends Associado {
@@ -10,7 +9,13 @@ public class Gestor extends Associado {
     public Gestor() {
     }
 
-    public Gestor(int nrCadastro, String nomeCompleto, String email, String senha, Equipe equipe, String cargo, long cpf) {
+    public Gestor(int nrCadastro,
+                  String nomeCompleto,
+                  String email,
+                  String senha,
+                  Equipe equipe,
+                  String cargo,
+                  long cpf) {
         super(nrCadastro, nomeCompleto, email, senha, equipe, cargo, cpf);
     }
 

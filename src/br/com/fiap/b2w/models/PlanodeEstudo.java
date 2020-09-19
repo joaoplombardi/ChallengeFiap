@@ -1,5 +1,7 @@
 package br.com.fiap.b2w.models;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class PlanodeEstudo {
 
@@ -7,10 +9,13 @@ public class PlanodeEstudo {
     private Gestor gestor;
     private LocalDate dtCriacao;
     private String areadeConhecimento;
-    private Recomendacoes[] recomendacoes;
+    private List<Recomendacao> recomendacoes;
     private int duracao;
 
-    public PlanodeEstudo(br.com.fiap.b2w.models.Associado associado, br.com.fiap.b2w.models.Gestor gestor, String areadeConhecimento, Recomendacoes[] recomendacoes) {
+    public PlanodeEstudo(Associado associado,
+                         Gestor gestor,
+                         String areadeConhecimento,
+                         List<Recomendacao> recomendacoes) {
         this.associado = associado;
         this.gestor = gestor;
         this.dtCriacao = LocalDate.now();
@@ -50,11 +55,11 @@ public class PlanodeEstudo {
         this.areadeConhecimento = areadeConhecimento;
     }
 
-    public Recomendacoes[] getRecomendacoes() {
+    public List<Recomendacao> getRecomendacoes() {
         return recomendacoes;
     }
 
-    public void setRecomendacoes(Recomendacoes[] recomendacoes) {
+    public void setRecomendacoes(List<Recomendacao> recomendacoes) {
         this.recomendacoes = recomendacoes;
     }
 
