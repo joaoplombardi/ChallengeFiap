@@ -21,7 +21,7 @@ public class EquipeDAO {
     public void salvar(Equipe equipe) throws SQLException, ClassNotFoundException {
         conecta();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        String sql = "inserto into T_B2W_EQUIPE (cd_equipe, cd_gerente, cd_rh, dt_inicio) values (?, ?, ?, to_date('?', 'yyyy/MM/dd'))";
+        String sql = "insert into T_B2W_EQUIPE (cd_equipe, cd_gerente, cd_rh, dt_inicio) values (?, ?, ?, to_date(?, 'yyyy/MM/dd'))";
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
         pStmt.setInt(1, equipe.getCdEquipe());
         pStmt.setInt(2, equipe.getGerenteResponsavel().getNrCadastro());
