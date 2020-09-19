@@ -1,0 +1,38 @@
+# SGP
+
+```puclass
+@startuml
+class Associado
+class Equipe
+class Gestor
+class PlanodeDesenvolvimento
+class PlanodeEstudo
+class Recomendacoes
+class RH
+class Status
+class Task
+
+Associado "1" -- "*" PlanodeEstudo
+Associado "1" -- "1" PlanodeDesenvolvimento
+
+Equipe "1" -- "1" Gestor
+Equipe "1" -- "1" RH
+Equipe "1" -- "*" Associado
+Equipe "1" -- "*" PlanodeDesenvolvimento
+
+Gestor "1" -- "*" Associado
+Gestor "1" -- "*" PlanodeDesenvolvimento
+
+PlanodeDesenvolvimento "1" -- "*" Task
+PlanodeDesenvolvimento "1" -- "1" Status
+PlanodeDesenvolvimento "1" -- "1" Gestor
+
+PlanodeEstudo "1" -- "1" Associado
+PlanodeEstudo "1" -- "1" Gestor
+PlanodeEstudo "1" -- "*" Recomendacoes
+
+Task "1" -- "1" Status
+
+RH "1" -- "*" PlanodeDesenvolvimento
+@enduml
+```
