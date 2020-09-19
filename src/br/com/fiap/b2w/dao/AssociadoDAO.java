@@ -13,23 +13,24 @@ public class AssociadoDAO {
     private Connection conn;
 
     public void conecta() throws ClassNotFoundException, SQLException{
+        Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
     }
 
     public void salvar(Associado associado) throws SQLException, ClassNotFoundException {
         conecta();
         String sql = "insert into T_B2W_ASSOCIADO (cd_cadastro_associado, cd_equipe, nm_nome, nm_email, nm_senha, nm_cargo, nr_cpf) " +
-                "values (?, ?, ?, ?, ?, ?, ?)";
+                "values (sq_associado.nextval, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
-        pStmt.setInt(1, associado.getNrCadastro());
-        pStmt.setInt(2, associado.getEquipe().getCdEquipe());
-        pStmt.setString(3, associado.getNomeCompleto());
-        pStmt.setString(4, associado.getEmail());
-        pStmt.setString(5, associado.getSenha());
-        pStmt.setString(6, associado.getCargo());
-        pStmt.setLong(7, associado.getCpf());
-        pStmt.executeUpdate();
 
+        pStmt.setInt(1, associado.getEquipe().getCdEquipe());
+        pStmt.setString(2, associado.getNomeCompleto());
+        pStmt.setString(3, associado.getEmail());
+        pStmt.setString(4, associado.getSenha());
+        pStmt.setString(5, associado.getCargo());
+        pStmt.setLong(6, associado.getCpf());
+        pStmt.executeUpdate();
+        desconecta();
     }
 
     public List<Associado> consultaTodosPorEquipe(int codigo) {

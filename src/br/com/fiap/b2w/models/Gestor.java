@@ -3,7 +3,6 @@ package br.com.fiap.b2w.models;
 import java.util.List;
 
 public class Gestor extends Associado {
-    private List<Associado> liderados;
     private List<PlanodeDesenvolvimento> planosCriados;
 
     public Gestor() {
@@ -30,7 +29,7 @@ public class Gestor extends Associado {
                   List<Associado> liderados,
                   List<PlanodeDesenvolvimento> planosCriados) {
         super(nrCadastro, nomeCompleto, email, senha, equipe, cargo, cpf);
-        this.liderados = liderados;
+//        this.liderados = liderados;
         this.planosCriados = planosCriados;
     }
 
@@ -42,11 +41,11 @@ public class Gestor extends Associado {
         this.planosCriados = planosCriados;
     }
 
-    public List<Associado> getLiderados() {
-        return liderados;
-    }
-
-    public void setLiderados(List<Associado> liderados) {
-        this.liderados = liderados;
-    }
+//    public List<Associado> getLiderados() {
+//        return liderados;
+//    }
+//
+//    public void setLiderados(List<Associado> liderados) {
+//        this.liderados = liderados;
+//    }
 }

@@ -1,15 +1,29 @@
 package br.com.fiap.b2w.dao;
 
 import br.com.fiap.b2w.models.Gestor;
+import br.com.fiap.b2w.models.PlanodeDesenvolvimento;
 import br.com.fiap.b2w.models.RH;
 
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 
 public class RHDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException {
+    public void conecta() throws ClassNotFoundException, SQLException{
+        Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
+    }
+
+
+    public void aprovarPlano(PlanodeDesenvolvimento plano) throws SQLException, ClassNotFoundException {
+        conecta();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        Statement stmt = this.conn.createStatement();
+        String sql = String.format("update T_B2W_PLANO_DESENVOLVIMENTO set st_ativo = 'A', dt_inicio = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
+                formatter.format(plano.getDtInicio()), plano.getCdPlanodeDesenvolvimento());
+        stmt.executeUpdate(sql);
+        desconecta();
     }
 
 
@@ -34,5 +48,10 @@ public class RHDAO {
             System.err.println("O responsável do RH não existe!");
         }
         return rh;
+    }
+    private void desconecta() throws SQLException {
+        if(!this.conn.isClosed()){
+            this.conn.close();
+        }
     }
 }

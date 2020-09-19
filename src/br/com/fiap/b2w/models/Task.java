@@ -2,6 +2,7 @@ package br.com.fiap.b2w.models;
 
 public class Task {
     private Integer cdTask;
+    private String nome;
     private PlanodeDesenvolvimento planoPertencente;
     private Status status;
     //    private LocalDate dtCriacao;
@@ -12,13 +13,15 @@ public class Task {
     public Task() {
     }
 
-    public Task(Integer cdTask,
+    public Task(String nome,
+                Integer cdTask,
                 Status status,
 //                LocalDate dtCriacao,
 //                LocalDate dtInicio,
 //                LocalDate dtTermino,
                 String objetivo,
                 PlanodeDesenvolvimento planoPertencente) {
+        this.nome = nome;
         this.cdTask = cdTask;
         this.status = status;
 //        this.dtCriacao = dtCriacao;
@@ -26,6 +29,14 @@ public class Task {
 //        this.dtTermino = dtTermino;
         this.objetivo = objetivo;
         this.planoPertencente = planoPertencente;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Integer getCdTask() {
