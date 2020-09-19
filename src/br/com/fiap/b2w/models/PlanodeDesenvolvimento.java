@@ -6,45 +6,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanodeDesenvolvimento {
-
+    private Integer cdPlanodeDesenvolvimento;
     private Associado associado;
     private Gestor gestor;
-    private LocalDate dtCriacao;
+    private LocalDate dtTermino;
+    private LocalDate dtInicio;
     private List<Task> tasks;
     private Double percentualConcluidos;
     private Status status;
+    private Boolean ativo;
 
     public PlanodeDesenvolvimento(Associado associado, Gestor gestor) {
         this.associado = associado;
         this.gestor = gestor;
         this.tasks = new ArrayList<>();
-        this.dtCriacao = LocalDate.now();
+        this.dtInicio = null;
+        this.dtTermino = null;
         this.percentualConcluidos = .0;
-        this. status = Status.PARADA;
+        this.status = Status.PARADA;
+        this.ativo = false;
     }
 
-    public br.com.fiap.b2w.models.Associado getAssociado() {
+    public Integer getCdPlanodeDesenvolvimento() {
+        return cdPlanodeDesenvolvimento;
+    }
+
+    public void setCdPlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento) {
+        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
+    }
+
+    public Associado getAssociado() {
         return associado;
     }
 
-    public void setAssociado(br.com.fiap.b2w.models.Associado associado) {
+    public void setAssociado(Associado associado) {
         this.associado = associado;
     }
 
-    public br.com.fiap.b2w.models.Gestor getGestor() {
+    public Gestor getGestor() {
         return gestor;
     }
 
-    public void setGestor(br.com.fiap.b2w.models.Gestor gestor) {
+    public void setGestor(Gestor gestor) {
         this.gestor = gestor;
     }
 
-    public LocalDate getDtCriacao() {
-        return dtCriacao;
+    public LocalDate getDtTermino() {
+        return dtTermino;
     }
 
-    public void setDtCriacao(LocalDate dtCriacao) {
-        this.dtCriacao = dtCriacao;
+    public void setDtTermino(LocalDate dtTermino) {
+        this.dtTermino = dtTermino;
+    }
+
+    public LocalDate getDtInicio() {
+        return dtInicio;
+    }
+
+    public void setDtInicio(LocalDate dtInicio) {
+        this.dtInicio = dtInicio;
     }
 
     public List<Task> getTasks() {
@@ -76,6 +96,14 @@ public class PlanodeDesenvolvimento {
         this.status = status;
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
     public void calculaPercentualConcluidos(){
         int concluidas = 0;
         for(int i = 0; i < this.tasks.size(); i++){
@@ -88,7 +116,7 @@ public class PlanodeDesenvolvimento {
         dt.format(percentual);
         this.percentualConcluidos = percentual;
     }
-    public void defineStatus(){
-        this.status = (this.percentualConcluidos < 100.0) ? Status.INICIALIZADA : Status.CONCLUIDA;
-    }
+
+
+
 }

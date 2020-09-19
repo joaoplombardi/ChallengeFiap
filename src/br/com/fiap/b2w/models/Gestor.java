@@ -3,24 +3,38 @@ package br.com.fiap.b2w.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gestor extends br.com.fiap.b2w.models.Associado {
-
-    private String setorGerencia;
+public class Gestor extends Associado {
     private List<Associado> liderados;
+    private List<PlanodeDesenvolvimento> planosCriados;
 
-    public Gestor(int nrCadastro, String nomeCompleto, String email,
-                  String senha, String cargo, long cpf, String setorGerencia, List<Associado> liderados) {
-        super(nrCadastro, nomeCompleto, email, senha, cargo, cpf);
-        this.setorGerencia = setorGerencia;
-        this.liderados = new ArrayList<>();
+    public Gestor() {
     }
 
-    public String getSetorGerencia() {
-        return setorGerencia;
+    public Gestor(int nrCadastro, String nomeCompleto, String email, String senha, Equipe equipe, String cargo, long cpf) {
+        super(nrCadastro, nomeCompleto, email, senha, equipe, cargo, cpf);
     }
 
-    public void setSetorGerencia(String setorGerencia) {
-        this.setorGerencia = setorGerencia;
+    public Gestor(int nrCadastro,
+                  String nomeCompleto,
+                  String email,
+                  String senha,
+                  String cargo,
+                  long cpf,
+                  Integer codigoSetorGerencia,
+                  Equipe equipe,
+                  List<Associado> liderados,
+                  List<PlanodeDesenvolvimento> planosCriados) {
+        super(nrCadastro, nomeCompleto, email, senha, equipe, cargo, cpf);
+        this.liderados = liderados;
+        this.planosCriados = planosCriados;
+    }
+
+    public List<PlanodeDesenvolvimento> getPlanosCriados() {
+        return planosCriados;
+    }
+
+    public void setPlanosCriados(List<PlanodeDesenvolvimento> planosCriados) {
+        this.planosCriados = planosCriados;
     }
 
     public List<Associado> getLiderados() {

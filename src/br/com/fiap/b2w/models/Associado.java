@@ -1,27 +1,44 @@
 package br.com.fiap.b2w.models;
 
+import java.util.List;
+
 public class Associado {
 
     private int nrCadastro;
     private String nomeCompleto;
     private String email;
     private String senha;
+    private Equipe equipe;
     private String cargo;
     private long cpf;
-    private PlanodeEstudo planodeEstudo;
+    private List<PlanodeEstudo> planodeEstudo;
     private PlanodeDesenvolvimento planodeDesenvolvimento;
 
-    public Associado(int nrCadastro, String nomeCompleto, String email, String senha, String cargo, long cpf) {
+    public Associado() {
+    }
+
+    public Associado(int nrCadastro,
+                     String nomeCompleto,
+                     String email,
+                     String senha,
+                     Equipe equipe,
+                     String cargo,
+                     long cpf) {
         this.nrCadastro = nrCadastro;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.senha = senha;
+        this.equipe = equipe;
         this.cargo = cargo;
         this.cpf = cpf;
     }
 
     public int getNrCadastro() {
         return nrCadastro;
+    }
+
+    public void setNrCadastro(int nrCadastro) {
+        this.nrCadastro = nrCadastro;
     }
 
     public String getNomeCompleto() {
@@ -36,8 +53,28 @@ public class Associado {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public String getCargo() {
         return cargo;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
     }
 
     public void setCargo(String cargo) {
@@ -48,11 +85,15 @@ public class Associado {
         return cpf;
     }
 
-    public PlanodeEstudo getPlanodeEstudo() {
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
+    }
+
+    public List<PlanodeEstudo> getPlanodeEstudo() {
         return planodeEstudo;
     }
 
-    public void setPlanodeEstudo(PlanodeEstudo planodeEstudo) {
+    public void setPlanodeEstudo(List<PlanodeEstudo> planodeEstudo) {
         this.planodeEstudo = planodeEstudo;
     }
 

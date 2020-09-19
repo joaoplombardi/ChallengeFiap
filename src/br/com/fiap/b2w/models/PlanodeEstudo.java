@@ -3,8 +3,8 @@ import java.time.LocalDate;
 
 public class PlanodeEstudo {
 
-    private br.com.fiap.b2w.models.Associado associado;
-    private br.com.fiap.b2w.models.Gestor gestor;
+    private Associado associado;
+    private Gestor gestor;
     private LocalDate dtCriacao;
     private String areadeConhecimento;
     private Recomendacoes[] recomendacoes;

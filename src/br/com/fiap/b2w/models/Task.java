@@ -5,8 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 public class
 Task {
-    private Gestor gestor;
-    private Associado lideradoaFazer;
+    private Integer cdTask;
     private Status status;
     private LocalDate dtCriacao;
     private LocalDate dtInicio;
@@ -16,26 +15,26 @@ Task {
     public Task() {
     }
 
-    public Task(Gestor gestor, Associado lideradoaFazer, String objetivo) {
-        this.gestor = gestor;
-        this.lideradoaFazer = lideradoaFazer;
-        this.dtCriacao = LocalDate.now();
-        this.dtInicio = null;
-        this.dtTermino = null;
+    public Task(Integer cdTask,
+                Status status,
+                LocalDate dtCriacao,
+                LocalDate dtInicio,
+                LocalDate dtTermino,
+                String objetivo) {
+        this.cdTask = cdTask;
+        this.status = status;
+        this.dtCriacao = dtCriacao;
+        this.dtInicio = dtInicio;
+        this.dtTermino = dtTermino;
         this.objetivo = objetivo;
-        this.status = Status.PARADA;
     }
 
-    public Gestor getGestor() {
-        return gestor;
+    public Integer getCdTask() {
+        return cdTask;
     }
 
-    public Associado getLideradoaFazer() {
-        return lideradoaFazer;
-    }
-
-    public void setLideradoaFazer(Associado lideradoaFazer) {
-        this.lideradoaFazer = lideradoaFazer;
+    public void setCdTask(Integer cdTask) {
+        this.cdTask = cdTask;
     }
 
     public Status getStatus() {
@@ -50,12 +49,24 @@ Task {
         return dtCriacao;
     }
 
+    public void setDtCriacao(LocalDate dtCriacao) {
+        this.dtCriacao = dtCriacao;
+    }
+
     public LocalDate getDtInicio() {
         return dtInicio;
     }
 
+    public void setDtInicio(LocalDate dtInicio) {
+        this.dtInicio = dtInicio;
+    }
+
     public LocalDate getDtTermino() {
         return dtTermino;
+    }
+
+    public void setDtTermino(LocalDate dtTermino) {
+        this.dtTermino = dtTermino;
     }
 
     public String getObjetivo() {
