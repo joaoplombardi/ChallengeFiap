@@ -9,21 +9,55 @@ public class PlanodeDesenvolvimento {
     private Integer cdPlanodeDesenvolvimento;
     private Associado associado;
     private Gestor gestor;
+    private Equipe equipe;
     private LocalDate dtTermino;
     private LocalDate dtInicio;
     private List<Task> tasks;
-    private Double percentualConcluidos;
-    private Status status;
+   // private Double percentualConcluidos;
+   // private Status status;
     private Boolean ativo;
 
-    public PlanodeDesenvolvimento(Associado associado, Gestor gestor) {
+    public PlanodeDesenvolvimento() {
+    }
+
+    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento,
+                                  Associado associado,
+                                  Gestor gestor,
+                                  Equipe equipe,
+                                  LocalDate dtInicio,
+                                  List<Task> tasks,
+                                  Boolean ativo) {
+        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
         this.associado = associado;
         this.gestor = gestor;
+        this.equipe = equipe;
+        this.dtInicio = dtInicio;
+        this.tasks = tasks;
+        this.ativo = ativo;
+    }
+
+    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento,
+                                  Associado associado,
+                                  Gestor gestor,
+                                  Equipe equipe,
+                                  List<Task> tasks,
+                                  Boolean ativo) {
+        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
+        this.associado = associado;
+        this.gestor = gestor;
+        this.equipe = equipe;
+        this.tasks = tasks;
+        this.ativo = ativo;
+    }
+
+    public PlanodeDesenvolvimento(Associado associado, Equipe equipe) {
+        this.associado = associado;
+        this.equipe = equipe;
         this.tasks = new ArrayList<>();
         this.dtInicio = null;
         this.dtTermino = null;
-        this.percentualConcluidos = .0;
-        this.status = Status.PARADA;
+       // this.percentualConcluidos = .0;
+     //   this.status = Status.PARADA;
         this.ativo = false;
     }
 
@@ -49,6 +83,15 @@ public class PlanodeDesenvolvimento {
 
     public void setGestor(Gestor gestor) {
         this.gestor = gestor;
+    }
+
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
     }
 
     public LocalDate getDtTermino() {
@@ -79,22 +122,22 @@ public class PlanodeDesenvolvimento {
         return tasks.get(posicao);
     }
 
-    public Double getPercentualConcluidos() {
-        calculaPercentualConcluidos();
-        return percentualConcluidos;
-    }
+//    public Double getPercentualConcluidos() {
+//        calculaPercentualConcluidos();
+//        return percentualConcluidos;
+//    }
 
-    public void setPercentualConcluidos(Double percentualConcluidos) {
-        this.percentualConcluidos = percentualConcluidos;
-    }
+//    public void setPercentualConcluidos(Double percentualConcluidos) {
+//        this.percentualConcluidos = percentualConcluidos;
+//    }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+//    public Status getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(Status status) {
+//        this.status = status;
+//    }
 
     public Boolean getAtivo() {
         return ativo;
@@ -104,18 +147,18 @@ public class PlanodeDesenvolvimento {
         this.ativo = ativo;
     }
 
-    public void calculaPercentualConcluidos(){
-        int concluidas = 0;
-        for(int i = 0; i < this.tasks.size(); i++){
-            if(this.tasks.get(i).getStatus() == Status.CONCLUIDA){
-                concluidas = concluidas + 1;
-            }
-        }
-        double percentual = (concluidas/this.tasks.size())*100;
-        DecimalFormat dt = new DecimalFormat("##0.0");
-        dt.format(percentual);
-        this.percentualConcluidos = percentual;
-    }
+//    public void calculaPercentualConcluidos(){
+//        int concluidas = 0;
+//        for(int i = 0; i < this.tasks.size(); i++){
+//            if(this.tasks.get(i).getStatus() == Status.CONCLUIDA){
+//                concluidas = concluidas + 1;
+//            }
+//        }
+//        double percentual = (concluidas/this.tasks.size())*100;
+//        DecimalFormat dt = new DecimalFormat("##0.0");
+//        dt.format(percentual);
+//        this.percentualConcluidos = percentual;
+//    }
 
 
 
