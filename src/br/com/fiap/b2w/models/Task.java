@@ -3,8 +3,9 @@ package br.com.fiap.b2w.models;
 public class Task {
     private Integer cdTask;
     private String nome;
-    private PlanodeDesenvolvimento planoPertencente;
+    private Integer planoPertencente;
     private Status status;
+
     //    private LocalDate dtCriacao;
 //    private LocalDate dtInicio;
 //    private LocalDate dtTermino;
@@ -20,7 +21,7 @@ public class Task {
 //                LocalDate dtInicio,
 //                LocalDate dtTermino,
                 String objetivo,
-                PlanodeDesenvolvimento planoPertencente) {
+                Integer planoPertencente) {
         this.nome = nome;
         this.cdTask = cdTask;
         this.status = status;
@@ -47,11 +48,11 @@ public class Task {
         this.cdTask = cdTask;
     }
 
-    public PlanodeDesenvolvimento getPlanoPertencente() {
+    public Integer getPlanoPertencente() {
         return planoPertencente;
     }
 
-    public void setPlanoPertencente(PlanodeDesenvolvimento planoPertencente) {
+    public void setPlanoPertencente(Integer planoPertencente) {
         this.planoPertencente = planoPertencente;
     }
 

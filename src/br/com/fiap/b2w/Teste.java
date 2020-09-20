@@ -65,7 +65,7 @@ public class Teste {
 
         alice.setNomeCompleto("Alice");
         alice.setEquipe(equipe);
-        alice.setLiderados(associados);
+       // alice.setLiderados(associados);
         alice.setPlanosCriados(planosdeDesenvolvimento);
 
         System.out.println("-----------------------");

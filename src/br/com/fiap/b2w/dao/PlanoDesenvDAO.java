@@ -79,7 +79,7 @@ public class PlanoDesenvDAO {
         conecta();
         Statement stmt = this.conn.createStatement();
         List<PlanodeDesenvolvimento> planosAtivos = new ArrayList<>();
-        String sql = "select * from T_B2W_PLANO_DESENVOLVIMENTO where cd_equipe = "+cd_equipe+" and ativo = 'A'";
+        String sql = "select * from T_B2W_PLANO_DES where cd_equipe = "+cd_equipe+" and ativo = 'A'";
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()){
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");

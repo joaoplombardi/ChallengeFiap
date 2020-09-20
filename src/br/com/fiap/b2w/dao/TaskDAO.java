@@ -26,7 +26,7 @@ public class TaskDAO {
                 "values (sq_task.nextval, ?, ?, ?, ?, ?)";
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
 
-        pStmt.setInt(1, task.getPlanoPertencente().getEquipe().getCdEquipe());
+        pStmt.setInt(1, task.getPlanoPertencente());
         pStmt.setInt(2, task.getCdTask());
         pStmt.setString(3, task.getNome());
         pStmt.setString(4, task.getObjetivo());
@@ -47,7 +47,7 @@ public class TaskDAO {
             String nome = rs.getString("nm_nome");
             Status status = Status.valueOf(rs.getString("st_status"));
             String objetivo = rs.getString("ds_task");
-            PlanodeDesenvolvimento plano = new PlanoDesenvDAO().consultaPorCodigo(rs.getInt("cd_plano_desenvolvimento"));
+            Integer plano = rs.getInt("cd_plano_desenvolvimento");
             tasksPlano.add(new Task(nome, codigo, status, objetivo, plano));
         }
         return tasksPlano;
