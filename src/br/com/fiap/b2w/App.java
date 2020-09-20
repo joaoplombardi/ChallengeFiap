@@ -131,6 +131,7 @@ public class App {
         System.out.println("Plano com Associado.....: " + associado.getPlanodeDesenvolvimento().getCdPlanodeDesenvolvimento());
         associado.getPlanodeDesenvolvimento().getTasks().forEach(task1 ->
                 System.out.println("Task com Associado......: " + task1.getNome()));
+
     }
 
     private static void consultaPlanosGestor() {
@@ -200,6 +201,44 @@ public class App {
             associado.setNomeCompleto("João");
             scan.nextLine();
 
+            Task task = new Task();
+            task.setNome("Java");
+            task.setStatus(Status.CRIADA);
+
+            Task task2 = new Task();
+            task2.setNome("Oracle");
+            task2.setStatus(Status.CRIADA);
+
+            List<Task> arrayTask = new ArrayList<>();
+            arrayTask.add(task);
+            arrayTask.add(task2);
+
+            PlanodeDesenvolvimento planodeDesenvolvimento = new PlanodeDesenvolvimento();
+            planodeDesenvolvimento.setAtivo(true);
+            planodeDesenvolvimento.setCdPlanodeDesenvolvimento(123);
+            planodeDesenvolvimento.setTasks(arrayTask);
+
+            associado.setNomeCompleto("Sérgio");
+            associado.setPlanodeDesenvolvimento(planodeDesenvolvimento);
+
+            List<PlanodeDesenvolvimento> arrayPlanosCriados = new ArrayList<>();
+            arrayPlanosCriados.add(planodeDesenvolvimento);
+            gestor.setPlanosCriados(arrayPlanosCriados);
+
+            RH rh = new RH();
+            rh.setPlanosParaAprovacao(arrayPlanosCriados);
+
+            associado.setPlanodeDesenvolvimento(planodeDesenvolvimento);
+
+            //System.out.println(planodeDesenvolvimento.getAssociado().getNomeCompleto()); não faz sentido
+            System.out.println("Gestor..................: " + gestor.getNomeCompleto());
+            System.out.println("Planos Criados..........: " + gestor.getPlanosCriados().size());
+            gestor.getPlanosCriados().forEach(planoCriado ->
+                    System.out.println("Código do Plano.........: " + planoCriado.getCdPlanodeDesenvolvimento() + " - " +
+                            "Ativo: " + planoCriado.getAtivo()));
+            gestor.getPlanosCriados().forEach(planoCriado ->
+                    planoCriado.getTasks().forEach(task1 ->
+                            System.out.println("Task do Plano...........: " + task1.getNome())));
 
             scan.nextLine();
         } catch (Exception e) {
