@@ -43,7 +43,6 @@ public class EquipeDAO {
             equipe.setGerenteResponsavel(new GestorDAO().consultaPorCodigo(rs.getInt("cd_gerente")));
             equipe.setRhResponsavel(new RHDAO().consultaPorCodigo(rs.getInt("cd_rh")));
             equipe.setDtInicio(rs.getDate("dt_inicio").toLocalDate());
-            equipe.setMembros(new AssociadoDAO().consultaTodosPorEquipe(rs.getInt("cd_equipe")));
         }
         return equipe;
      }
@@ -54,14 +53,14 @@ public class EquipeDAO {
     public List<PlanodeDesenvolvimento> consultaTodosPorEquipe(Integer codigoEquipe) throws SQLException, ClassNotFoundException {
         conecta();
         Statement stmt = this.conn.createStatement();
-        String sql = ("select * from T_B2W_PLANO_DESENVOLVIMENTO where cd_equipe = " + codigoEquipe + " order by cd_plano_desenvolvimento ASC");
+        String sql = ("select * from T_B2W_PLANO_DES where cd_equipe = " + codigoEquipe + " order by cd_plano_desenvolvimento ASC");
         ResultSet rs = stmt.executeQuery(sql);
         List<PlanodeDesenvolvimento> consultaPorEquipe = new ArrayList<>();
         while(rs.next()){
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Equipe equipe = new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe"));
-            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cadastro_associado"));
-            Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente"));
+            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
+            Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
             LocalDate dtInicio = rs.getDate("dt_inicio") != null ? rs.getDate("dt_inicio").toLocalDate() : null;
             LocalDate dtTermino = rs.getDate("dt_termino") != null ? rs.getDate("dt_termino").toLocalDate() : null;
             Boolean ativo = rs.getString("st_ativo") == "A";

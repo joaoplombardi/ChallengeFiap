@@ -20,7 +20,7 @@ public class PlanoDesenvDAO {
     public void salvar(PlanodeDesenvolvimento planodeDesenvolvimento) throws SQLException, ClassNotFoundException {
         conecta();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        String sql = "insert into T_B2W_PLANO_DESENVOLVIMENTO (cd_plano_desenvolvimento, cd_equipe, cd_cadastro_associado, cd_cadastro_gerente, st_ativo)" +
+        String sql = "insert into T_B2W_PLANO_DES (cd_plano_desenvolvimento, cd_equipe, cd_cadastro_associado, cd_cadastro_gerente, st_ativo)" +
                 "values(sq_plano_desenvolvimento.nextval, ?, ?, ?, ?)";
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
 
@@ -38,7 +38,7 @@ public class PlanoDesenvDAO {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         Statement stmt = this.conn.createStatement();
         String dtInicio = formatter.format(planodeDesenvolvimento.getDtInicio());
-        String sql = String.format("update T_B2W_PLANO_DESENVOLVIMENTO set dt_inicio = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
+        String sql = String.format("update T_B2W_PLANO_DES set dt_inicio = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
                 dtInicio, planodeDesenvolvimento.getCdPlanodeDesenvolvimento());
         stmt.executeUpdate(sql);
         desconecta();
@@ -49,7 +49,7 @@ public class PlanoDesenvDAO {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         Statement stmt = this.conn.createStatement();
         String dtTermino = formatter.format(planodeDesenvolvimento.getDtTermino());
-        String sql = String.format("update T_B2W_PLANO_DESENVOLVIMENTO set dt_termino = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
+        String sql = String.format("update T_B2W_PLANO_DES set dt_termino = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
                 dtTermino, planodeDesenvolvimento.getCdPlanodeDesenvolvimento());
         stmt.executeUpdate(sql);
         desconecta();
@@ -59,7 +59,7 @@ public class PlanoDesenvDAO {
         conecta();
         Statement stmt = this.conn.createStatement();
         List<PlanodeDesenvolvimento> planosInativos = new ArrayList<>();
-        String sql = "select * from T_B2W_PLANO_DESENVOLVIMENTO where cd_equipe = "+cd_equipe+" and ativo = 'I'";
+        String sql = "select * from T_B2W_PLANO_DES where cd_equipe = "+cd_equipe+" and ativo = 'I'";
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()){
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
@@ -67,11 +67,12 @@ public class PlanoDesenvDAO {
             Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente"));
             LocalDate dtInicio = rs.getDate("dt_inicio") != null ? rs.getDate("dt_inicio").toLocalDate() : null;
             LocalDate dtTermino = rs.getDate("dt_termino") != null ? rs.getDate("dt_termino").toLocalDate() : null;
-            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cadastro_associado"));
+            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
             Equipe equipe = new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe"));
             List<Task> tasks = new TaskDAO().consultaTodosDentroDeUmPlano(rs.getInt("cd_plano_desenvolvimento"));
             planosInativos.add(new PlanodeDesenvolvimento(codigo, associado, gestor, equipe, dtInicio, dtTermino, tasks, ativo));
         }
+        desconecta();
         return planosInativos;
     }
 
@@ -92,13 +93,14 @@ public class PlanoDesenvDAO {
             List<Task> tasks = new TaskDAO().consultaTodosDentroDeUmPlano(rs.getInt("cd_plano_desenvolvimento"));
             planosAtivos.add(new PlanodeDesenvolvimento(codigo, associado, gestor, equipe, dtInicio, dtTermino, tasks, ativo));
         }
+        desconecta();
         return planosAtivos;
     }
 
     public PlanodeDesenvolvimento consultaPorCodigo(int cd_plano_desenvolvimento) throws SQLException, ClassNotFoundException {
         conecta();
         PlanodeDesenvolvimento plano = new PlanodeDesenvolvimento();
-        String sql = "select * from T_B2W_PLANO_DESENVOLVIMENTO where cd_plano_desenvolvimento = " + cd_plano_desenvolvimento;
+        String sql = "select * from T_B2W_PLANO_DES where cd_plano_desenvolvimento = " + cd_plano_desenvolvimento;
         Statement stmt = this.conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
@@ -110,11 +112,12 @@ public class PlanoDesenvDAO {
             plano.setCdPlanodeDesenvolvimento(codigo);
             plano.setGestor(new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente")));
             plano.setDtInicio(dtInicio);
-            plano.setAssociado(new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cadastro_associado")));
+            plano.setAssociado(new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado")));
             plano.setAtivo(ativo);
             plano.setEquipe(new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe")));
             plano.setTasks(new TaskDAO().consultaTodosDentroDeUmPlano(rs.getInt("cd_plano_desenvolvimento")));
-        }else System.err.println("Plano de desenvolviemnto não encontrado");
+        }else System.err.println("Plano de desenvolvimento não encontrado");
+        desconecta();
         return plano;
     }
     private void desconecta() throws SQLException {

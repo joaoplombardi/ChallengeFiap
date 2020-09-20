@@ -19,7 +19,7 @@ public class AssociadoDAO {
 
     public void salvar(Associado associado) throws SQLException, ClassNotFoundException {
         conecta();
-        String sql = "insert into T_B2W_ASSOCIADO (cd_cadastro_associado, cd_equipe, nm_nome, nm_email, nm_senha, nm_cargo, nr_cpf) " +
+        String sql = "insert into T_B2W_ASSOCIADO (cd_cad_associado, cd_equipe, nm_nome, nm_email, nm_senha, nm_cargo, nr_cpf) " +
                 "values (sq_associado.nextval, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
 
@@ -33,19 +33,15 @@ public class AssociadoDAO {
         desconecta();
     }
 
-    public List<Associado> consultaTodosPorEquipe(int codigo) {
-        return null;
-    }
-
     public Associado consultaPorCodigo(int codigo) throws SQLException, ClassNotFoundException {
         conecta();
         Associado associado = new Associado();
         Statement stmt = conn.createStatement();
-        String sql = "select * from T_B2W_ASSOCIADO where cd_cadastro_associado = " + codigo;
+        String sql = "select * from T_B2W_ASSOCIADO where cd_cad_associado = " + codigo;
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         if(rs != null){
-            associado.setNrCadastro(rs.getInt("cd_cadastro_associado"));
+            associado.setNrCadastro(rs.getInt("cd_cad_associado"));
             associado.setNomeCompleto(rs.getString("nm_nome"));
             associado.setEmail(rs.getString("nm_email"));
             associado.setSenha(rs.getString("nm_senha"));
@@ -56,7 +52,9 @@ public class AssociadoDAO {
         }else {
             System.err.println("O Funcionário não existe!");
         }
+        desconecta();
         return associado;
+
     }
 
     private void desconecta() throws SQLException {

@@ -20,7 +20,7 @@ public class RHDAO {
         conecta();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         Statement stmt = this.conn.createStatement();
-        String sql = String.format("update T_B2W_PLANO_DESENVOLVIMENTO set st_ativo = 'A', dt_inicio = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
+        String sql = String.format("update T_B2W_PLANO_DES set st_ativo = 'A', dt_inicio = to_date('%s', 'yyyy/MM/dd') where cd_plano_desenvolvimento = %s",
                 formatter.format(plano.getDtInicio()), plano.getCdPlanodeDesenvolvimento());
         stmt.executeUpdate(sql);
         desconecta();
@@ -31,11 +31,11 @@ public class RHDAO {
         conecta();
         RH rh = new RH();
         Statement stmt = conn.createStatement();
-        String sql = "select * from T_B2W_RH where cd_cadastro_associado = " + codigo;
+        String sql = "select * from T_B2W_RH where cd_cad_associado = " + codigo;
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         if(rs != null){
-            rh.setNrCadastro(rs.getInt("cd_cadastro_associado"));
+            rh.setNrCadastro(rs.getInt("cd_cad_associado"));
             rh.setNomeCompleto(rs.getString("nm_nome"));
             rh.setEmail(rs.getString("nm_email"));
             rh.setSenha(rs.getString("nm_senha"));
@@ -47,6 +47,7 @@ public class RHDAO {
         }else {
             System.err.println("O responsável do RH não existe!");
         }
+        desconecta();
         return rh;
     }
     private void desconecta() throws SQLException {

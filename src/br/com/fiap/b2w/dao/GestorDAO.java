@@ -30,13 +30,13 @@ public class GestorDAO {
     public List<PlanodeDesenvolvimento> consultaTodosPorGestor(Integer codigoGestor) throws SQLException, ClassNotFoundException {
         conecta();
         Statement stmt = this.conn.createStatement();
-        String sql = ("select * from T_B2W_PLANO_DESENVOLVIMENTO where cd_gerente = " + codigoGestor + " order by cd_plano_desenvolvimento ASC");
+        String sql = ("select * from T_B2W_PLANO_DES where cd_gerente = " + codigoGestor + " order by cd_plano_desenvolvimento ASC");
         ResultSet rs = stmt.executeQuery(sql);
         List<PlanodeDesenvolvimento> consultaPorGestor = new ArrayList<>();
         while(rs.next()){
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Equipe equipe = new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe"));
-            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cadastro_associado"));
+            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
             Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente"));
             LocalDate dtInicio = rs.getDate("dt_inicio") != null ? rs.getDate("dt_inicio").toLocalDate() : null;
             LocalDate dtTermino = rs.getDate("dt_termino") != null ? rs.getDate("dt_termino").toLocalDate() : null;
@@ -52,7 +52,7 @@ public class GestorDAO {
         conecta();
         Gestor gestor = new Gestor();
         Statement stmt = conn.createStatement();
-        String sql = "select * from T_B2W_GERENTE where cd_cadastro_associado = " + codigo;
+        String sql = "select * from T_B2W_GERENTE where cd_cad_associado = " + codigo;
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         if(rs != null){
