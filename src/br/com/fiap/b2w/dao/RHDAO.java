@@ -1,6 +1,5 @@
 package br.com.fiap.b2w.dao;
 
-import br.com.fiap.b2w.models.Gestor;
 import br.com.fiap.b2w.models.PlanodeDesenvolvimento;
 import br.com.fiap.b2w.models.RH;
 
@@ -10,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class RHDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException{
+    public void conecta() throws ClassNotFoundException, SQLException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
     }
@@ -34,7 +33,7 @@ public class RHDAO {
         String sql = "select * from T_B2W_RH where cd_cad_associado = " + codigo;
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
-        if(rs != null){
+        if (rs != null) {
             rh.setNrCadastro(rs.getInt("cd_cad_associado"));
             rh.setNomeCompleto(rs.getString("nm_nome"));
             rh.setEmail(rs.getString("nm_email"));
@@ -44,14 +43,15 @@ public class RHDAO {
             rh.setCpf(rs.getLong("nr_cpf"));
             rh.setPlanosParaAprovacao(new PlanoDesenvDAO().consultaInativos(rs.getInt("cd_equipe")));
 
-        }else {
+        } else {
             System.err.println("O responsável do RH não existe!");
         }
         desconecta();
         return rh;
     }
+
     private void desconecta() throws SQLException {
-        if(!this.conn.isClosed()){
+        if (!this.conn.isClosed()) {
             this.conn.close();
         }
     }

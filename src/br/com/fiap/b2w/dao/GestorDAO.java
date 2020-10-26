@@ -2,7 +2,6 @@ package br.com.fiap.b2w.dao;
 
 import br.com.fiap.b2w.models.*;
 
-import java.sql.Connection;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
 public class GestorDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException{
+    public void conecta() throws ClassNotFoundException, SQLException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
     }
@@ -33,7 +32,7 @@ public class GestorDAO {
         String sql = ("select * from T_B2W_PLANO_DES where cd_gerente = " + codigoGestor + " order by cd_plano_desenvolvimento ASC");
         ResultSet rs = stmt.executeQuery(sql);
         List<PlanodeDesenvolvimento> consultaPorGestor = new ArrayList<>();
-        while(rs.next()){
+        while (rs.next()) {
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Equipe equipe = new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe"));
             Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
@@ -55,7 +54,7 @@ public class GestorDAO {
         String sql = "select * from T_B2W_GERENTE where cd_cad_associado = " + codigo;
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
-        if(rs != null){
+        if (rs != null) {
             gestor.setNrCadastro(rs.getInt("cd_cadastro_associado"));
             gestor.setNomeCompleto(rs.getString("nm_nome"));
             gestor.setEmail(rs.getString("nm_email"));
@@ -64,14 +63,14 @@ public class GestorDAO {
             gestor.setCargo(rs.getString("nm_cargo"));
             gestor.setCpf(rs.getLong("nr_cpf"));
             gestor.setPlanosCriados(consultaTodosPorGestor(rs.getInt("cd_cadastro_associado")));
-        }else {
+        } else {
             System.err.println("O gerente não existe!");
         }
         return gestor;
     }
 
     private void desconecta() throws SQLException {
-        if(!this.conn.isClosed()){
+        if (!this.conn.isClosed()) {
             this.conn.close();
         }
     }

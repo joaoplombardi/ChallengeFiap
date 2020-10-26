@@ -2,9 +2,6 @@ package br.com.fiap.b2w.dao;
 
 import br.com.fiap.b2w.models.*;
 
-import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +11,7 @@ import java.util.List;
 public class EquipeDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException{
+    public void conecta() throws ClassNotFoundException, SQLException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
     }
@@ -31,7 +28,8 @@ public class EquipeDAO {
         pStmt.executeUpdate();
         desconecta();
     }
-     public Equipe consultaPorCodigo(Integer codigo) throws SQLException, ClassNotFoundException {
+
+    public Equipe consultaPorCodigo(Integer codigo) throws SQLException, ClassNotFoundException {
         conecta();
         Equipe equipe = new Equipe();
         Statement stmt = conn.createStatement();
@@ -45,9 +43,7 @@ public class EquipeDAO {
             equipe.setDtInicio(rs.getDate("dt_inicio").toLocalDate());
         }
         return equipe;
-     }
-
-
+    }
 
 
     public List<PlanodeDesenvolvimento> consultaTodosPorEquipe(Integer codigoEquipe) throws SQLException, ClassNotFoundException {
@@ -56,7 +52,7 @@ public class EquipeDAO {
         String sql = ("select * from T_B2W_PLANO_DES where cd_equipe = " + codigoEquipe + " order by cd_plano_desenvolvimento ASC");
         ResultSet rs = stmt.executeQuery(sql);
         List<PlanodeDesenvolvimento> consultaPorEquipe = new ArrayList<>();
-        while(rs.next()){
+        while (rs.next()) {
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Equipe equipe = new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe"));
             Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
@@ -72,19 +68,8 @@ public class EquipeDAO {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     private void desconecta() throws SQLException {
-        if(!this.conn.isClosed()){
+        if (!this.conn.isClosed()) {
             this.conn.close();
         }
     }

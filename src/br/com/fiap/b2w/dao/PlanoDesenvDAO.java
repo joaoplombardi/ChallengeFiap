@@ -1,8 +1,7 @@
 package br.com.fiap.b2w.dao;
+
 import br.com.fiap.b2w.models.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +11,7 @@ import java.util.List;
 public class PlanoDesenvDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException{
+    public void conecta() throws ClassNotFoundException, SQLException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
     }
@@ -30,7 +29,6 @@ public class PlanoDesenvDAO {
         pStmt.setString(4, planodeDesenvolvimento.getAtivo() == true ? "A" : "I");
         desconecta();
     }
-
 
 
     public void iniciarPlanoDesenvolvimento(PlanodeDesenvolvimento planodeDesenvolvimento) throws SQLException, ClassNotFoundException {
@@ -59,9 +57,9 @@ public class PlanoDesenvDAO {
         conecta();
         Statement stmt = this.conn.createStatement();
         List<PlanodeDesenvolvimento> planosInativos = new ArrayList<>();
-        String sql = "select * from T_B2W_PLANO_DES where cd_equipe = "+cd_equipe+" and ativo = 'I'";
+        String sql = "select * from T_B2W_PLANO_DES where cd_equipe = " + cd_equipe + " and ativo = 'I'";
         ResultSet rs = stmt.executeQuery(sql);
-        while(rs.next()){
+        while (rs.next()) {
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Boolean ativo = (rs.getString("st_ativo") == "A");
             Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente"));
@@ -80,9 +78,9 @@ public class PlanoDesenvDAO {
         conecta();
         Statement stmt = this.conn.createStatement();
         List<PlanodeDesenvolvimento> planosAtivos = new ArrayList<>();
-        String sql = "select * from T_B2W_PLANO_DES where cd_equipe = "+cd_equipe+" and ativo = 'A'";
+        String sql = "select * from T_B2W_PLANO_DES where cd_equipe = " + cd_equipe + " and ativo = 'A'";
         ResultSet rs = stmt.executeQuery(sql);
-        while(rs.next()){
+        while (rs.next()) {
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Boolean ativo = (rs.getString("st_ativo") == "A");
             Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente"));
@@ -104,11 +102,13 @@ public class PlanoDesenvDAO {
         Statement stmt = this.conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
-        if (rs != null){
+        if (rs != null) {
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Boolean ativo = (rs.getString("st_ativo") == "A");
             LocalDate dtInicio = rs.getDate("dt_inicio").toLocalDate();
-            if (rs.getDate("dt_termino") != null){plano.setDtTermino(rs.getDate("dt_termino").toLocalDate());}
+            if (rs.getDate("dt_termino") != null) {
+                plano.setDtTermino(rs.getDate("dt_termino").toLocalDate());
+            }
             plano.setCdPlanodeDesenvolvimento(codigo);
             plano.setGestor(new GestorDAO().consultaPorCodigo(rs.getInt("cd_cadastro_gerente")));
             plano.setDtInicio(dtInicio);
@@ -116,12 +116,13 @@ public class PlanoDesenvDAO {
             plano.setAtivo(ativo);
             plano.setEquipe(new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe")));
             plano.setTasks(new TaskDAO().consultaTodosDentroDeUmPlano(rs.getInt("cd_plano_desenvolvimento")));
-        }else System.err.println("Plano de desenvolvimento não encontrado");
+        } else System.err.println("Plano de desenvolvimento não encontrado");
         desconecta();
         return plano;
     }
+
     private void desconecta() throws SQLException {
-        if(!this.conn.isClosed()){
+        if (!this.conn.isClosed()) {
             this.conn.close();
         }
     }

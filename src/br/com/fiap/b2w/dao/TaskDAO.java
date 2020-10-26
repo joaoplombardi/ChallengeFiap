@@ -1,12 +1,8 @@
 package br.com.fiap.b2w.dao;
 
-import br.com.fiap.b2w.models.PlanodeDesenvolvimento;
 import br.com.fiap.b2w.models.Status;
 import br.com.fiap.b2w.models.Task;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +11,7 @@ import java.util.List;
 public class TaskDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException{
+    public void conecta() throws ClassNotFoundException, SQLException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
     }
@@ -42,7 +38,7 @@ public class TaskDAO {
         String sql = "select * from T_B2W_TASK where cd_plano_desenvolvimento = " + cd_plano_desenvolvimento;
         ResultSet rs = stmt.executeQuery(sql);
 
-        while(rs.next()){
+        while (rs.next()) {
             Integer codigo = rs.getInt("cd_task");
             String nome = rs.getString("nm_nome");
             Status status = Status.valueOf(rs.getString("st_status"));
@@ -57,19 +53,19 @@ public class TaskDAO {
         conecta();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         Statement stmt = this.conn.createStatement();
-        String sql = "update T_B2W_TASK set st_status = 'Em andamento' where cd_task = "+task.getCdTask();
+        String sql = "update T_B2W_TASK set st_status = 'Em andamento' where cd_task = " + task.getCdTask();
         stmt.executeUpdate(sql);
     }
 
     public void encerraTask(Task task) throws SQLException, ClassNotFoundException {
         conecta();
         Statement stmt = this.conn.createStatement();
-        String sql = "update T_B2W_TASK set st_status = 'Concluída' where cd_task = "+task.getCdTask();
+        String sql = "update T_B2W_TASK set st_status = 'Concluída' where cd_task = " + task.getCdTask();
         stmt.executeUpdate(sql);
     }
 
     private void desconecta() throws SQLException {
-        if(!this.conn.isClosed()){
+        if (!this.conn.isClosed()) {
             this.conn.close();
         }
     }
