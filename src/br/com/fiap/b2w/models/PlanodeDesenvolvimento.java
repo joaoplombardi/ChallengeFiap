@@ -49,7 +49,14 @@ public class PlanodeDesenvolvimento {
         this.ativo = ativo;
     }
 
-    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento, Associado associado, Gestor gestor, Equipe equipe, LocalDate dtTermino, LocalDate dtInicio, List<Task> tasks, Boolean ativo) {
+    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento,
+                                  Associado associado,
+                                  Gestor gestor,
+                                  Equipe equipe,
+                                  LocalDate dtTermino,
+                                  LocalDate dtInicio,
+                                  List<Task> tasks,
+                                  Boolean ativo) {
         this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
         this.associado = associado;
         this.gestor = gestor;

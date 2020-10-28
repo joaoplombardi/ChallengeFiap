@@ -1,18 +1,19 @@
 package br.com.fiap.b2w.dao;
 
+import br.com.fiap.b2w.factory.ConnectionFactory;
 import br.com.fiap.b2w.models.Associado;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class AssociadoDAO {
     private Connection conn;
 
-    public void conecta() throws ClassNotFoundException, SQLException {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        this.conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl", "RM86433", "110701");
+    public void conecta() throws ClassNotFoundException, SQLException, IOException {
+        this.conn = new ConnectionFactory().getConnection();
     }
 
-    public void salvar(Associado associado) throws SQLException, ClassNotFoundException {
+    public void salvar(Associado associado) throws SQLException, ClassNotFoundException, IOException {
         conecta();
         String sql = "insert into T_B2W_ASSOCIADO (cd_cad_associado, cd_equipe, nm_nome, nm_email, nm_senha, nm_cargo, nr_cpf) " +
                 "values (sq_associado.nextval, ?, ?, ?, ?, ?, ?)";
@@ -28,7 +29,7 @@ public class AssociadoDAO {
         desconecta();
     }
 
-    public Associado consultaPorCodigo(int codigo) throws SQLException, ClassNotFoundException {
+    public Associado consultaPorCodigo(int codigo) throws SQLException, ClassNotFoundException, IOException {
         conecta();
         Associado associado = new Associado();
         Statement stmt = conn.createStatement();
