@@ -1,5 +1,6 @@
-package br.com.fiap.b2w.dao;
+package br.com.connectall.b2w.dao;
 
+import br.com.connectall.b2w.models.*;
 import br.com.fiap.b2w.models.*;
 
 import java.sql.*;

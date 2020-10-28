@@ -1,4 +1,4 @@
-package br.com.fiap.b2w.factory;
+package br.com.connectall.b2w.factory;
 
 import java.io.FileInputStream;
 import java.io.IOException;

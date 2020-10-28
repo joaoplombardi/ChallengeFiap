@@ -1,4 +1,4 @@
-package br.com.fiap.b2w.models;
+package br.com.connectall.b2w.models;
 
 public class Recomendacao {
     //tipo = leitura, documentação etc.

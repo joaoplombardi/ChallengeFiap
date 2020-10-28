@@ -1,10 +1,10 @@
-package br.com.fiap.b2w.validation;
+package br.com.connectall.b2w.validation;
 
-import br.com.fiap.b2w.exceptions.AtivoSemDataException;
-import br.com.fiap.b2w.exceptions.PlanoSemAssociadoException;
-import br.com.fiap.b2w.exceptions.PlanoSemGestorException;
-import br.com.fiap.b2w.exceptions.PlanoSemTaskException;
-import br.com.fiap.b2w.models.PlanodeDesenvolvimento;
+import br.com.connectall.b2w.exceptions.AtivoSemDataException;
+import br.com.connectall.b2w.exceptions.PlanoSemAssociadoException;
+import br.com.connectall.b2w.exceptions.PlanoSemGestorException;
+import br.com.connectall.b2w.exceptions.PlanoSemTaskException;
+import br.com.connectall.b2w.models.PlanodeDesenvolvimento;
 
 public class PlanoDesenvValidator {
 

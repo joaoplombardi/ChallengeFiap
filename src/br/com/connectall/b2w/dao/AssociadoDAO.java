@@ -1,7 +1,7 @@
-package br.com.fiap.b2w.dao;
+package br.com.connectall.b2w.dao;
 
-import br.com.fiap.b2w.factory.ConnectionFactory;
-import br.com.fiap.b2w.models.Associado;
+import br.com.connectall.b2w.factory.ConnectionFactory;
+import br.com.connectall.b2w.models.Associado;
 
 import java.io.IOException;
 import java.sql.*;

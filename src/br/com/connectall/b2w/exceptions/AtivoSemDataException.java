@@ -1,4 +1,4 @@
-package br.com.fiap.b2w.exceptions;
+package br.com.connectall.b2w.exceptions;
 
 public class AtivoSemDataException extends Exception {
 

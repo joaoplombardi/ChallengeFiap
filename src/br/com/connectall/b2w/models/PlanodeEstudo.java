@@ -1,4 +1,4 @@
-package br.com.fiap.b2w.models;
+package br.com.connectall.b2w.models;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,19 +26,19 @@ public class PlanodeEstudo {
         this.recomendacoes = recomendacoes;
     }
 
-    public br.com.fiap.b2w.models.Associado getAssociado() {
+    public Associado getAssociado() {
         return associado;
     }
 
-    public void setAssociado(br.com.fiap.b2w.models.Associado associado) {
+    public void setAssociado(Associado associado) {
         this.associado = associado;
     }
 
-    public br.com.fiap.b2w.models.Gestor getGestor() {
+    public Gestor getGestor() {
         return gestor;
     }
 
-    public void setGestor(br.com.fiap.b2w.models.Gestor gestor) {
+    public void setGestor(Gestor gestor) {
         this.gestor = gestor;
     }
 

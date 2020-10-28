@@ -1,7 +1,7 @@
-package br.com.fiap.b2w.dao;
+package br.com.connectall.b2w.dao;
 
-import br.com.fiap.b2w.models.Status;
-import br.com.fiap.b2w.models.Task;
+import br.com.connectall.b2w.models.Status;
+import br.com.connectall.b2w.models.Task;
 
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
