@@ -8,6 +8,8 @@ package "models" #DDDDDD {
         - equipe : Equipe
         - cargo : String
         - cpf : String
+        - planosDeEstudo : List<PlanoDeEstudo>
+        - planosDeDesenvolvimento : PlanoDeDesenvolvimento
         + getId()
         + setId(int id)
         + getNomeCompleto()
@@ -22,6 +24,10 @@ package "models" #DDDDDD {
         + setCargo(Cargo cargo)
         + getCpf()
         + setCpf(String cpf)
+        + getPlanosDeEstudo()
+        + setPlanosDeEstudo(List<PlanoDeEstudo> planosDeEstudo)
+        + getPlanodeDesenvolvimento()
+        + setPlanodeDesenvolvimento(PlanoDeDesenvolvimento planodeDesenvolvimento)
     }
     class Equipe {
         - id : Integer
@@ -53,6 +59,8 @@ package "models" #DDDDDD {
         - senha : String
         - equipe : Equipe
         - cpf : String
+        - planosCriados : List<PlanoDeDesenvolvimento>
+        - equipes : List<Equipe>
         + getId()
         + setId(int id)
         + getNomeCompleto()
@@ -65,8 +73,12 @@ package "models" #DDDDDD {
         + setEquipe(Equipe equipe)
         + getCpf()
         + setCpf(String cpf)
-    }
-    class PlanodeDesenvolvimento {
+        + getPlanosCriados()
+        + setPlanosCriados(List<PlanoDeDesenvolvimento> planosCriados)
+        + getEquipes()
+        + setEquipes(List<Equipe> equipes)
+        }
+        class PlanodeDesenvolvimento {
         - id : int
         - associado : Colaborador
         - gestor : Gestor
@@ -179,5 +191,11 @@ package "models" #DDDDDD {
         + setDtTermino(LocalDate dtTermino)
     }
 }
+
+PlanodeDesenvolvimento *-- Task
+PlanodeDesenvolvimento  o-- Associado
+Recomendacoes o-- PlanodeEstudo
+PlanodeDesenvolvimento  o-- Gestor
+Equipe  o-- Associado
 
 @enduml
