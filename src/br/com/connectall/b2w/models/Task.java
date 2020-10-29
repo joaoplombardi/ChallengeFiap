@@ -1,35 +1,49 @@
 package br.com.connectall.b2w.models;
 
+import java.time.LocalDate;
+
 public class Task {
-    private Integer cdTask;
+    private int id;
     private String nome;
+    private String descricao;
     private Integer planoPertencente;
     private Status status;
-
-    //    private LocalDate dtCriacao;
-//    private LocalDate dtInicio;
-//    private LocalDate dtTermino;
-    private String objetivo;
+    private LocalDate dtCriacao;
+    private LocalDate dtTermino;
 
     public Task() {
     }
 
-    public Task(String nome,
-                Integer cdTask,
+    public Task(int id,
+                String nome,
+                String descricao,
+                Integer planoPertencente,
                 Status status,
-//                LocalDate dtCriacao,
-//                LocalDate dtInicio,
-//                LocalDate dtTermino,
-                String objetivo,
-                Integer planoPertencente) {
+                LocalDate dtCriacao,
+                LocalDate dtTermino) {
+        this.id = id;
         this.nome = nome;
-        this.cdTask = cdTask;
-        this.status = status;
-//        this.dtCriacao = dtCriacao;
-//        this.dtInicio = dtInicio;
-//        this.dtTermino = dtTermino;
-        this.objetivo = objetivo;
+        this.descricao = descricao;
         this.planoPertencente = planoPertencente;
+        this.status = status;
+        this.dtCriacao = dtCriacao;
+        this.dtTermino = dtTermino;
+    }
+
+    public Task(String nome, Integer codigo, Status status, String objetivo, Integer plano) {
+        this.nome = nome;
+        this.id = codigo;
+        this.status = status;
+        this.descricao = objetivo;
+        this.planoPertencente = plano;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -40,12 +54,12 @@ public class Task {
         this.nome = nome;
     }
 
-    public Integer getCdTask() {
-        return cdTask;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setCdTask(Integer cdTask) {
-        this.cdTask = cdTask;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Integer getPlanoPertencente() {
@@ -64,38 +78,23 @@ public class Task {
         this.status = status;
     }
 
-//    public LocalDate getDtCriacao() {
-//        return dtCriacao;
-//    }
-//
-//    public void setDtCriacao(LocalDate dtCriacao) {
-//        this.dtCriacao = dtCriacao;
-//    }
-//
-//    public LocalDate getDtInicio() {
-//        return dtInicio;
-//    }
-//
-//    public void setDtInicio(LocalDate dtInicio) {
-//        this.dtInicio = dtInicio;
-//    }
-//
-//    public LocalDate getDtTermino() {
-//        return dtTermino;
-//    }
-//
-//    public void setDtTermino(LocalDate dtTermino) {
-//        this.dtTermino = dtTermino;
-//    }
-
-    public String getObjetivo() {
-        return objetivo;
+    public LocalDate getDtCriacao() {
+        return dtCriacao;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = objetivo;
+    public void setDtCriacao(LocalDate dtCriacao) {
+        this.dtCriacao = dtCriacao;
     }
-//
+
+    public LocalDate getDtTermino() {
+        return dtTermino;
+    }
+
+    public void setDtTermino(LocalDate dtTermino) {
+        this.dtTermino = dtTermino;
+    }
+
+    //
 //    public void iniciar(){
 //        this.status = Status.INICIALIZADA;
 //        this.dtInicio = LocalDate.now();

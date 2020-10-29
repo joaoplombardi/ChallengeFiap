@@ -1,8 +1,8 @@
 package br.com.connectall.b2w.dao;
 
 import br.com.connectall.b2w.models.*;
-import br.com.fiap.b2w.models.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,14 +23,14 @@ public class EquipeDAO {
         String sql = "insert into T_B2W_EQUIPE (cd_equipe, cd_gerente, cd_rh, dt_inicio) values (sq_equipe.nextval, ?, ?, to_date(?, 'yyyy/MM/dd'))";
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
 
-        pStmt.setInt(1, equipe.getGerenteResponsavel().getNrCadastro());
-        pStmt.setInt(2, equipe.getRhResponsavel().getNrCadastro());
+        pStmt.setInt(1, equipe.getGerenteResponsavel().getId());
+        pStmt.setInt(2, equipe.getRhResponsavel().getId());
         pStmt.setString(3, formatter.format(equipe.getDtInicio()));
         pStmt.executeUpdate();
         desconecta();
     }
 
-    public Equipe consultaPorCodigo(Integer codigo) throws SQLException, ClassNotFoundException {
+    public Equipe consultaPorCodigo(Integer codigo) throws SQLException, ClassNotFoundException, IOException {
         conecta();
         Equipe equipe = new Equipe();
         Statement stmt = conn.createStatement();
@@ -38,7 +38,7 @@ public class EquipeDAO {
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         if (rs != null) {
-            equipe.setCdEquipe(rs.getInt("cd_equipe"));
+            equipe.setId(rs.getInt("cd_equipe"));
             equipe.setGerenteResponsavel(new GestorDAO().consultaPorCodigo(rs.getInt("cd_gerente")));
             equipe.setRhResponsavel(new RHDAO().consultaPorCodigo(rs.getInt("cd_rh")));
             equipe.setDtInicio(rs.getDate("dt_inicio").toLocalDate());
@@ -47,22 +47,22 @@ public class EquipeDAO {
     }
 
 
-    public List<PlanodeDesenvolvimento> consultaTodosPorEquipe(Integer codigoEquipe) throws SQLException, ClassNotFoundException {
+    public List<PlanoDeDesenvolvimento> consultaTodosPorEquipe(Integer codigoEquipe) throws SQLException, ClassNotFoundException, IOException {
         conecta();
         Statement stmt = this.conn.createStatement();
         String sql = ("select * from T_B2W_PLANO_DES where cd_equipe = " + codigoEquipe + " order by cd_plano_desenvolvimento ASC");
         ResultSet rs = stmt.executeQuery(sql);
-        List<PlanodeDesenvolvimento> consultaPorEquipe = new ArrayList<>();
+        List<PlanoDeDesenvolvimento> consultaPorEquipe = new ArrayList<>();
         while (rs.next()) {
             Integer codigo = rs.getInt("cd_plano_desenvolvimento");
             Equipe equipe = new EquipeDAO().consultaPorCodigo(rs.getInt("cd_equipe"));
-            Associado associado = new AssociadoDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
+            Associado associado = new AssociadoDAO().consultaPorId(rs.getInt("cd_cad_associado"));
             Gestor gestor = new GestorDAO().consultaPorCodigo(rs.getInt("cd_cad_associado"));
             LocalDate dtInicio = rs.getDate("dt_inicio") != null ? rs.getDate("dt_inicio").toLocalDate() : null;
             LocalDate dtTermino = rs.getDate("dt_termino") != null ? rs.getDate("dt_termino").toLocalDate() : null;
             Boolean ativo = rs.getString("st_ativo") == "A";
             List<Task> tasks = new TaskDAO().consultaTodosDentroDeUmPlano(rs.getInt("cd_plano_desenvolvimento"));
-            consultaPorEquipe.add(new PlanodeDesenvolvimento(codigo, associado, gestor, equipe, dtInicio, dtTermino, tasks, ativo));
+            consultaPorEquipe.add(new PlanoDeDesenvolvimento(codigo, associado, gestor, equipe, dtInicio, dtTermino, tasks, ativo));
         }
         desconecta();
         return consultaPorEquipe;

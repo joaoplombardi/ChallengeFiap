@@ -3,7 +3,7 @@ package br.com.connectall.b2w.models;
 import java.time.LocalDate;
 import java.util.List;
 
-public class PlanodeEstudo {
+public class PlanoDeEstudo {
 
     private Associado associado;
     private Gestor gestor;
@@ -12,10 +12,10 @@ public class PlanodeEstudo {
     private List<Recomendacao> recomendacoes;
     private int duracao;
 
-    public PlanodeEstudo() {
+    public PlanoDeEstudo() {
     }
 
-    public PlanodeEstudo(Associado associado,
+    public PlanoDeEstudo(Associado associado,
                          Gestor gestor,
                          String areadeConhecimento,
                          List<Recomendacao> recomendacoes) {

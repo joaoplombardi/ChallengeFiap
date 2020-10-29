@@ -5,26 +5,26 @@ import java.util.List;
 
 public class Equipe {
 
-    private Integer cdEquipe;
+    private int id;
     private LocalDate dtInicio;
     private LocalDate dtEncerramento;
     private Gestor gerenteResponsavel;
     private RH rhResponsavel;
     private List<Associado> membros;
-    private List<PlanodeDesenvolvimento> planosEquipe;
+    private List<PlanoDeDesenvolvimento> planosEquipe;
 
     public Equipe() {
 
     }
 
-    public Equipe(Integer cdEquipe,
+    public Equipe(Integer id,
                   LocalDate dtInicio,
                   LocalDate dtEncerramento,
                   Gestor gerenteResponsavel,
                   RH rhResponsavel,
                   List<Associado> membros,
-                  List<PlanodeDesenvolvimento> planosEquipe) {
-        this.cdEquipe = cdEquipe;
+                  List<PlanoDeDesenvolvimento> planosEquipe) {
+        this.id = id;
         this.dtInicio = dtInicio;
         this.dtEncerramento = dtEncerramento;
         this.gerenteResponsavel = gerenteResponsavel;
@@ -33,12 +33,12 @@ public class Equipe {
         this.planosEquipe = planosEquipe;
     }
 
-    public Integer getCdEquipe() {
-        return cdEquipe;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCdEquipe(Integer cdEquipe) {
-        this.cdEquipe = cdEquipe;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public LocalDate getDtInicio() {
@@ -81,11 +81,11 @@ public class Equipe {
         this.membros = membros;
     }
 
-    public List<PlanodeDesenvolvimento> getPlanosEquipe() {
+    public List<PlanoDeDesenvolvimento> getPlanosEquipe() {
         return planosEquipe;
     }
 
-    public void setPlanosEquipe(List<PlanodeDesenvolvimento> planosEquipe) {
+    public void setPlanosEquipe(List<PlanoDeDesenvolvimento> planosEquipe) {
         this.planosEquipe = planosEquipe;
     }
 }

@@ -23,9 +23,9 @@ public class TaskDAO {
         PreparedStatement pStmt = this.conn.prepareStatement(sql);
 
         pStmt.setInt(1, task.getPlanoPertencente());
-        pStmt.setInt(2, task.getCdTask());
+        pStmt.setInt(2, task.getId());
         pStmt.setString(3, task.getNome());
-        pStmt.setString(4, task.getObjetivo());
+        pStmt.setString(4, task.getDescricao());
         pStmt.setString(5, task.getStatus().getStatus());
         pStmt.executeUpdate();
         desconecta();
@@ -53,14 +53,14 @@ public class TaskDAO {
         conecta();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         Statement stmt = this.conn.createStatement();
-        String sql = "update T_B2W_TASK set st_status = 'Em andamento' where cd_task = " + task.getCdTask();
+        String sql = "update T_B2W_TASK set st_status = 'Em andamento' where cd_task = " + task.getId();
         stmt.executeUpdate(sql);
     }
 
     public void encerraTask(Task task) throws SQLException, ClassNotFoundException {
         conecta();
         Statement stmt = this.conn.createStatement();
-        String sql = "update T_B2W_TASK set st_status = 'Concluída' where cd_task = " + task.getCdTask();
+        String sql = "update T_B2W_TASK set st_status = 'Concluída' where cd_task = " + task.getId();
         stmt.executeUpdate(sql);
     }
 

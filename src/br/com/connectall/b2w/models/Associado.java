@@ -4,27 +4,27 @@ import java.util.List;
 
 public class Associado {
 
-    private int nrCadastro;
+    private int id;
     private String nomeCompleto;
     private String email;
     private String senha;
     private Equipe equipe;
     private String cargo;
-    private long cpf;
-    private List<PlanodeEstudo> planodeEstudo;
-    private PlanodeDesenvolvimento planodeDesenvolvimento;
+    private String cpf;
+    private List<PlanoDeEstudo> planosDeEstudo;
+    private PlanoDeDesenvolvimento planosDeDesenvolvimento;
 
     public Associado() {
     }
 
-    public Associado(int nrCadastro,
+    public Associado(int id,
                      String nomeCompleto,
                      String email,
                      String senha,
                      Equipe equipe,
                      String cargo,
-                     long cpf) {
-        this.nrCadastro = nrCadastro;
+                     String cpf) {
+        this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.senha = senha;
@@ -33,12 +33,12 @@ public class Associado {
         this.cpf = cpf;
     }
 
-    public int getNrCadastro() {
-        return nrCadastro;
+    public int getId() {
+        return id;
     }
 
-    public void setNrCadastro(int nrCadastro) {
-        this.nrCadastro = nrCadastro;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNomeCompleto() {
@@ -81,27 +81,27 @@ public class Associado {
         this.cargo = cargo;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public List<PlanodeEstudo> getPlanodeEstudo() {
-        return planodeEstudo;
+    public List<PlanoDeEstudo> getPlanosDeEstudo() {
+        return planosDeEstudo;
     }
 
-    public void setPlanodeEstudo(List<PlanodeEstudo> planodeEstudo) {
-        this.planodeEstudo = planodeEstudo;
+    public void setPlanosDeEstudo(List<PlanoDeEstudo> planosDeEstudo) {
+        this.planosDeEstudo = planosDeEstudo;
     }
 
-    public PlanodeDesenvolvimento getPlanodeDesenvolvimento() {
-        return planodeDesenvolvimento;
+    public PlanoDeDesenvolvimento getPlanodeDesenvolvimento() {
+        return planosDeDesenvolvimento;
     }
 
-    public void setPlanodeDesenvolvimento(PlanodeDesenvolvimento planodeDesenvolvimento) {
-        this.planodeDesenvolvimento = planodeDesenvolvimento;
+    public void setPlanodeDesenvolvimento(PlanoDeDesenvolvimento planodeDesenvolvimento) {
+        this.planosDeDesenvolvimento = planodeDesenvolvimento;
     }
 }

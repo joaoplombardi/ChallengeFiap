@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanodeDesenvolvimento {
-    private Integer cdPlanodeDesenvolvimento;
+public class PlanoDeDesenvolvimento {
+    private int id;
     private Associado associado;
     private Gestor gestor;
     private Equipe equipe;
@@ -16,17 +16,17 @@ public class PlanodeDesenvolvimento {
     // private Status status;
     private Boolean ativo;
 
-    public PlanodeDesenvolvimento() {
+    public PlanoDeDesenvolvimento() {
     }
 
-    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento,
+    public PlanoDeDesenvolvimento(int id,
                                   Associado associado,
                                   Gestor gestor,
                                   Equipe equipe,
                                   LocalDate dtInicio,
                                   List<Task> tasks,
                                   Boolean ativo) {
-        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
+        this.id = id;
         this.associado = associado;
         this.gestor = gestor;
         this.equipe = equipe;
@@ -35,13 +35,13 @@ public class PlanodeDesenvolvimento {
         this.ativo = ativo;
     }
 
-    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento,
+    public PlanoDeDesenvolvimento(int id,
                                   Associado associado,
                                   Gestor gestor,
                                   Equipe equipe,
                                   List<Task> tasks,
                                   Boolean ativo) {
-        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
+        this.id = id;
         this.associado = associado;
         this.gestor = gestor;
         this.equipe = equipe;
@@ -49,7 +49,7 @@ public class PlanodeDesenvolvimento {
         this.ativo = ativo;
     }
 
-    public PlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento,
+    public PlanoDeDesenvolvimento(int id,
                                   Associado associado,
                                   Gestor gestor,
                                   Equipe equipe,
@@ -57,7 +57,7 @@ public class PlanodeDesenvolvimento {
                                   LocalDate dtInicio,
                                   List<Task> tasks,
                                   Boolean ativo) {
-        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
+        this.id = id;
         this.associado = associado;
         this.gestor = gestor;
         this.equipe = equipe;
@@ -67,7 +67,7 @@ public class PlanodeDesenvolvimento {
         this.ativo = ativo;
     }
 
-    public PlanodeDesenvolvimento(Associado associado, Equipe equipe) {
+    public PlanoDeDesenvolvimento(Associado associado, Equipe equipe) {
         this.associado = associado;
         this.equipe = equipe;
         this.tasks = new ArrayList<>();
@@ -78,12 +78,12 @@ public class PlanodeDesenvolvimento {
         this.ativo = false;
     }
 
-    public Integer getCdPlanodeDesenvolvimento() {
-        return cdPlanodeDesenvolvimento;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCdPlanodeDesenvolvimento(Integer cdPlanodeDesenvolvimento) {
-        this.cdPlanodeDesenvolvimento = cdPlanodeDesenvolvimento;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Associado getAssociado() {
